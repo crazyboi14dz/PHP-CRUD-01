@@ -4,11 +4,24 @@ $updateId = $_GET['updateId'];
 $query = "SELECT * FROM interns WHERE id=$updateId";
 $run = mysqli_query($conn, $query);
 $data = mysqli_fetch_assoc($run);
+// fetching the data from associated array
 $first_name = $data['first_name'];
 $last_name = $data['last_name'];
 $phone_no = $data['phone_no'];
 $mail = $data['mail'];
 $field = $data['field'];
+
+// update button query
+if (isset($_POST['update'])) {
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    $phone_no = $_POST['phone_no'];
+    $mail = $_POST['mail'];
+    $field = $_POST['field'];
+    $query = "UPDATE `interns` SET `first_name`='$first_name',`last_name`='$last_name',`phone_no`='$phone_no',`mail`='$mail',`field`='$field' WHERE `id`=$updateId";
+    $run = mysqli_query($conn, $query);
+    header('location:display.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -192,17 +205,3 @@ $field = $data['field'];
 </body>
 
 </html>
-<?php
-if (isset($_POST['update'])) {
-    $first_name = $_POST['first_name'];
-    $last_name = $_POST['last_name'];
-    $phone_no = $_POST['phone_no'];
-    $mail = $_POST['mail'];
-    $field = $_POST['field'];
-    $displayPage = "display.php";
-    $query = "UPDATE `interns` SET `first_name`='$first_name',`last_name`='$last_name',`phone_no`='$phone_no',
-`mail`='$mail',`field`='$field' WHERE `id`=$updateId";
-    $run = mysqli_query($conn, $query);
-    header("Location:" . $displayPage);
-}
-?>
