@@ -34,7 +34,9 @@
             }
         }
 
-        a {text-decoration: none;}
+        a {
+            text-decoration: none;
+        }
 
         button {
             padding: 8px 14px;
@@ -89,7 +91,7 @@
             border-bottom: 1px double #acadac;
             display: grid;
             word-break: break-word;
-            grid-template-columns: 196.9px 196.9px 196.9px 196.9px 196.9px 196.9px 196.9px;
+            grid-template-columns: 196.9px 196.9px 196.9px 196.9px 196.9px 196.9px 196.9px 196.9px;
         }
 
         tr:hover {
@@ -143,32 +145,31 @@
 
         @media screen and (max-width:1440px) {
             .tr-laptop-l {
-                grid-template-columns: 188px 188px 188px 188px 188px 188px 188px;
+                grid-template-columns: 99px 147px 175px 177px 188px 188px 188px 188px;
             }
         }
 
         @media screen and (max-width:1319px) {
             .tr-laptop-l-go {
-                grid-template-columns: 172px 172px 172px 172px 172px 172px 172px;
+                grid-template-columns: 172px 172px 172px 172px 172px 172px 172px 172px;
             }
         }
 
         @media screen and (max-width:1207px) {
             .tr-laptop-l-go-2 {
-                grid-template-columns: 162px 162px 162px 162px 162px 162px 162px;
+                grid-template-columns: 162px 162px 162px 162px 162px 162px 162px 162px;
             }
         }
 
         @media screen and (max-width:1137px) {
             .tr-laptop {
-                grid-template-columns: 148px 148px 148px 148px 148px 148px 148px;
+                grid-template-columns: 148px 148px 148px 148px 148px 148px 148px 148px;
             }
         }
-        1065
 
         @media screen and (max-width:1160px) {
             .tr-laptop-go {
-                grid-template-columns: 138px 138px 138px 138px 138px 138px 138px;
+                grid-template-columns: 138px 138px 138px 138px 138px 138px 138px 138px;
             }
         }
 
@@ -283,6 +284,7 @@
             <thead>
                 <tr class="tr-laptop-l tr-laptop-l-go tr-laptop-l-go-2 tr-laptop tr-laptop-go">
                     <th class="th-md th-sm">SR NO.</th>
+                    <th class="th-md th-sm">Profile Photo</th>
                     <th class="th-md th-sm">FIRST NAME</th>
                     <th class="th-md th-sm">LAST NAME</th>
                     <th class="th-md th-sm">PHONE NUMBER</th>
@@ -303,6 +305,9 @@
                         <td class="td-md td-sm">
                             <?php echo $sr; ?>
                         </td>
+                        <td class="td-md">
+                            <img height="100" width="100" src="<?php echo $data['upload_files']; ?>" />
+                        </td>
                         <td class="td-md td-sm">
                             <?php echo $data['first_name']; ?>
                         </td>
@@ -318,6 +323,7 @@
                         <td class="td-md">
                             <?php echo $data['field']; ?>
                         </td>
+
                         <td class="td-md td-sm operation-btn">
                             <a href="update-after.php?updateId=<?php echo $data['id'] ?>"><button
                                     class="button-xl button-sm">EDIT</button></a>

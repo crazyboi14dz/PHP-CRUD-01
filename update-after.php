@@ -10,15 +10,26 @@ $last_name = $data['last_name'];
 $phone_no = $data['phone_no'];
 $mail = $data['mail'];
 $field = $data['field'];
+$upload_files = $data['upload_files'];
 
 // update button query
+// echo $upload_files;
+
+
 if (isset($_POST['update'])) {
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
     $phone_no = $_POST['phone_no'];
     $mail = $_POST['mail'];
     $field = $_POST['field'];
-    $query = "UPDATE `interns` SET `first_name`='$first_name',`last_name`='$last_name',`phone_no`='$phone_no',`mail`='$mail',`field`='$field' WHERE `id`=$updateId";
+    if (isset($_POST['upload_files'])) {
+        $img_loc = $_FILES['upload_files']['tmp_name'];
+        $img_name = $_FILES['upload_files']['name'];
+        move_uploaded_file($img_loc, 'images/' . $img_name);
+        $upload_files = 'images/' . $img_name;
+    }
+
+    $query = "UPDATE `interns` SET `first_name`='$first_name',`last_name`='$last_name',`phone_no`='$phone_no',`mail`='$mail',`field`='$field',`upload_files`='$upload_files' WHERE `id`=$updateId";
     $run = mysqli_query($conn, $query);
     header('location:display.php');
 }
@@ -58,7 +69,7 @@ if (isset($_POST['update'])) {
         }
 
         .container {
-            margin-top: 8%;
+            margin-top: 20px;
             display: grid;
             justify-content: center;
             text-transform: uppercase;
@@ -98,6 +109,11 @@ if (isset($_POST['update'])) {
             align-items: center;
             justify-content: space-between;
         }
+
+        .upload-desktop {
+            width: 210px;
+        }
+
 
         .update {
             border: none;
@@ -163,7 +179,7 @@ if (isset($_POST['update'])) {
 
 <body>
     <div class="container container-mobile">
-        <form class="form-mobile form-mobile-sm" action="" method="post">
+        <form class="form-mobile form-mobile-sm" action="" method="post" enctype="multipart/form-data">
             <h5>UPDATE FORM</h5>
             <div class="label-input div-mobile">
                 <label for="first_name" class="label-input-mobile">
@@ -198,6 +214,15 @@ if (isset($_POST['update'])) {
                     field </label>
                 <input type="text" class="label-input-mobile" id="field" name="field" placeholder="Enter field"
                     value="<?php echo $field; ?>">
+            </div>
+            <div class="label-input div-mobile">
+                <label for="upload_files" class="label-input-mobile">
+                    Upload DP </label>
+                <input type="file" id="upload_files" name="upload_files" value="<?php echo $upload_files; ?>"
+                    class="upload-desktop label-input-mobile">
+            </div>
+            <div style="display: flex;justify-content: end;">
+                <img height="100px" width="100px" src="<?php echo $upload_files; ?>" alt="<?php echo $upload_files; ?>">
             </div>
             <button class="update" name="update">UPDATE</button>
         </form>

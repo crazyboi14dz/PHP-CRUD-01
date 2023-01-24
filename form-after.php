@@ -7,8 +7,13 @@ if (isset($_POST['register'])) {
     $mail = $_POST['mail'];
     $field = $_POST['field'];
 
-    $query = "INSERT INTO interns(first_name, last_name, phone_no,mail,field)
-    VALUES('$first_name','$last_name','$phone_no','$mail','$field')";
+    $img_loc = $_FILES['upload_files']['tmp_name'];
+    $img_name = $_FILES['upload_files']['name'];
+    move_uploaded_file($img_loc, 'images/' . $img_name);
+    $upload_files = 'images/' . $img_name;
+
+    $query = "INSERT INTO interns(first_name, last_name, phone_no,mail,field,upload_files)
+    VALUES('$first_name','$last_name','$phone_no','$mail','$field','$upload_files')";
 
     $result = mysqli_query($conn, $query);
     header("location:display.php");
@@ -49,7 +54,7 @@ if (isset($_POST['register'])) {
         }
 
         .container {
-            margin-top: 10%;
+            margin-top: 5%;
             display: grid;
             justify-content: center;
             text-transform: uppercase;
@@ -88,6 +93,10 @@ if (isset($_POST['register'])) {
             display: flex;
             align-items: center;
             justify-content: space-between;
+        }
+
+        .upload-desktop {
+            width: 210px;
         }
 
         .register {
@@ -150,7 +159,7 @@ if (isset($_POST['register'])) {
 
 <body>
     <div class="container">
-        <form class="form-mobile form-mobile-sm" action="" method="post">
+        <form class="form-mobile form-mobile-sm" action="" method="post" enctype="multipart/form-data">
             <h5>FORM</h5>
             <div class="label-input div-mobile">
                 <label for="first_name" class="label-input-mobile">
@@ -184,6 +193,11 @@ if (isset($_POST['register'])) {
                 <label for="field" class="label-input-mobile">
                     field </label>
                 <input type="text" id="field" name="field" class="label-input-mobile" placeholder="Enter field">
+            </div>
+            <div class="label-input div-mobile">
+                <label for="upload_files" class="label-input-mobile">
+                    Upload DP </label>
+                <input type="file" id="upload_files" name="upload_files" class="upload-desktop label-input-mobile">
             </div>
             <button class="register register-mobile" name="register">REGISTER</button>
         </form>
