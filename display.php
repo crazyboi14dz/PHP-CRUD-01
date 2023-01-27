@@ -91,7 +91,7 @@
             border-bottom: 1px double #acadac;
             display: grid;
             word-break: break-word;
-            grid-template-columns: 196.9px 196.9px 196.9px 196.9px 196.9px 196.9px 196.9px 196.9px;
+            grid-template-columns: 100px 106px 120px 120px 142px 161px 132px 175px 110px 110px 170px;
         }
 
         tr:hover {
@@ -145,31 +145,32 @@
 
         @media screen and (max-width:1440px) {
             .tr-laptop-l {
-                grid-template-columns: 99px 147px 175px 177px 188px 188px 188px 188px;
+                grid-template-columns: 60px 130px 139px 115px 120px 160px 107px 182px 96px 95px 170px;
+                /* grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); */
             }
         }
 
-        @media screen and (max-width:1319px) {
+        @media screen and (max-width:1406) {
             .tr-laptop-l-go {
-                grid-template-columns: 172px 172px 172px 172px 172px 172px 172px 172px;
+                grid-template-columns: 89px 125px 120px 157px 88px 88px 136px 174px 83px 83px 162px;
             }
         }
 
         @media screen and (max-width:1207px) {
             .tr-laptop-l-go-2 {
-                grid-template-columns: 162px 162px 162px 162px 162px 162px 162px 162px;
+                grid-template-columns: 89px 125px 120px 157px 88px 88px 136px 174px 83px 83px 162px;
             }
         }
 
         @media screen and (max-width:1137px) {
             .tr-laptop {
-                grid-template-columns: 148px 148px 148px 148px 148px 148px 148px 148px;
+                grid-template-columns: 89px 125px 120px 157px 88px 88px 136px 174px 83px 83px 162px;
             }
         }
 
         @media screen and (max-width:1160px) {
             .tr-laptop-go {
-                grid-template-columns: 138px 138px 138px 138px 138px 138px 138px 138px;
+                grid-template-columns: 89px 125px 120px 157px 88px 88px 136px 174px 83px 83px 162px;
             }
         }
 
@@ -290,6 +291,9 @@
                     <th class="th-md th-sm">PHONE NUMBER</th>
                     <th class="th-md th-sm">MAIL</th>
                     <th class="th-md th-sm">FIELD</th>
+                    <th class="th-md th-sm">DATE AND TIME</th>
+                    <th class="th-md th-sm">Gender</th>
+                    <th class="th-md th-sm">Skills</th>
                     <th class="th-md th-sm">OPERATIONS</th>
                 </tr>
             </thead>
@@ -306,7 +310,8 @@
                             <?php echo $sr; ?>
                         </td>
                         <td class="td-md">
-                            <img height="100" width="100" src="<?php echo $data['upload_files']; ?>" />
+                            <img style="border-radius:50px" height="50" width="50"
+                                src="<?php echo $data['upload_files']; ?>" />
                         </td>
                         <td class="td-md td-sm">
                             <?php echo $data['first_name']; ?>
@@ -322,6 +327,15 @@
                         </td>
                         <td class="td-md">
                             <?php echo $data['field']; ?>
+                        </td>
+                        <td class="td-md">
+                            <?php echo $data['date_time']; ?>
+                        </td>
+                        <td class="td-md">
+                            <?php echo $data['gender'] ?>
+                        </td>
+                        <td class="td-md">
+                            <?php echo $data['skills'] ?>
                         </td>
 
                         <td class="td-md td-sm operation-btn">

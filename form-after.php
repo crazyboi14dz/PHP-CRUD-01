@@ -6,17 +6,25 @@ if (isset($_POST['register'])) {
     $phone_no = $_POST['phone_no'];
     $mail = $_POST['mail'];
     $field = $_POST['field'];
+    $date_time = $_POST['date_time'];
+    // radio
+    $gender = $_POST['gender'];
 
+    // checkbox
+    $skills = $_POST['skills'];
+    // implode method is used to convert the array form to string form usually used for checkbox
+    $skills = implode(',', $skills);
+    // upload files
     $img_loc = $_FILES['upload_files']['tmp_name'];
     $img_name = $_FILES['upload_files']['name'];
     move_uploaded_file($img_loc, 'images/' . $img_name);
     $upload_files = 'images/' . $img_name;
 
-    $query = "INSERT INTO interns(first_name, last_name, phone_no,mail,field,upload_files)
-    VALUES('$first_name','$last_name','$phone_no','$mail','$field','$upload_files')";
+    $query = "INSERT INTO interns(first_name, last_name, phone_no,mail,field,date_time,gender,skills,upload_files)
+    VALUES('$first_name','$last_name','$phone_no','$mail','$field','$date_time','$gender','$skills','$upload_files')";
 
     $result = mysqli_query($conn, $query);
-    header("location:display.php");
+    // header("location:display.php");
 }
 ?>
 <!DOCTYPE html>
@@ -54,7 +62,7 @@ if (isset($_POST['register'])) {
         }
 
         .container {
-            margin-top: 5%;
+            margin: 5%;
             display: grid;
             justify-content: center;
             text-transform: uppercase;
@@ -193,6 +201,35 @@ if (isset($_POST['register'])) {
                 <label for="field" class="label-input-mobile">
                     field </label>
                 <input type="text" id="field" name="field" class="label-input-mobile" placeholder="Enter field">
+            </div>
+            <div class="label-input div-mobile">
+                <label for="date_time" class="label-input-mobile">
+                    Date & Time</label>
+                <input type="datetime-local" id="date_time" name="date_time" class="upload-desktop label-input-mobile">
+            </div>
+            <div class="label-input div-mobile">
+                <label class="label-input-mobile">
+                    Gender</label>
+                <div style="font-size: 14px;">
+                    <input type="radio" id="male" name="gender" value="male" class="label-input-mobile">
+                    <label for="male">male</label>
+                    <input type="radio" id="female" name="gender" value="female" class="label-input-mobile">
+                    <label for="female">female</label>
+                    <input type="radio" id="others" name="gender" value="others" class="label-input-mobile">
+                    <label for="others">others</label>
+                </div>
+            </div>
+            <div class="label-input div-mobile">
+                <label class="label-input-mobile">
+                    Skills</label>
+                <div style="font-size: 14px;">
+                    <input type="checkbox" id="Web" name="skills[]" value="web" class="label-input-mobile">
+                    <label for="web">Web</label>
+                    <input type="checkbox" id="mobile" name="skills[]" value="mobile" class="label-input-mobile">
+                    <label for="mobile">mobile</label>
+                    <input type="checkbox" id="uiux" name="skills[]" value="ui_ux" class="label-input-mobile">
+                    <label for="UIUX">UI/UX</label>
+                </div>
             </div>
             <div class="label-input div-mobile">
                 <label for="upload_files" class="label-input-mobile">
